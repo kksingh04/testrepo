@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/python:2-3.14-trixie
+FROM mcr.microsoft.com/devcontainers/python:2-3.14-bookworm
 
 # Install Git LFS
 RUN apt-get update && \

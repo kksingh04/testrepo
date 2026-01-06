@@ -7,16 +7,46 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": ".."
-	}
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"python.linting.flake8Enabled": true,
+				"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8"
+			},
+			"extensions": [
+				"ms-python.flake8"
+			]
+		}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	/*"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},*/
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [5000],
+	"portsAttributes": {
+		"5000": {
+			"label": "python web app",
+			"onAutoForward": "notify",
+			"protocol": "http"
+		}
+	},
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "pip3 install --user -r requirements.txt",
+	"postCreateCommand": "pip3 install -r requirements.txt",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"moby": true,
+			"installDockerBuildx": true,
+			"installDockerComposeSwitch": true,
+			"version": "latest",
+			"dockerDashComposeVersion": "v2"
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},
